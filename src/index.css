@@ -1,0 +1,386 @@
+@import "tailwindcss";
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #0a0a0a;
+    /* Tailwind's bg-gray-100 */
+    color: #f3f4f6;
+}
+
+/* Design system color variables based on provided palette */
+
+:root {
+    /* Light theme base colors (D tones will be darker overlays using black) */
+    --bg: #FFFFFF;
+    /* Page Background */
+    --surface: #F0F4F9;
+    /* Surface / card background */
+    --card-bg: #FFFFFF;
+    /* User card background */
+    --outline: #C4C7C5;
+    /* border / outline */
+    --input-bg: #F0F4F9;
+    /* input field background */
+    --text-primary: #1F1F1F;
+    /* primary text */
+    --text-secondary: #444746;
+    /* secondary text */
+    --primary-base: #0B57D0;
+    /* primary / links */
+    --on-primary: #FFFFFF;
+    /* text on primary */
+
+    /* Primary / Accent placeholders (kept for dark mode behavior) */
+    --primary-base: #02308A;
+    --primary-d20: color-mix(in srgb, black 20%, var(--primary-base));
+    --primary-d40: color-mix(in srgb, black 40%, var(--primary-base));
+    --primary-d60: color-mix(in srgb, black 60%, var(--primary-base));
+
+    --accent-base: #409775;
+    --accent-d20: color-mix(in srgb, black 20%, var(--accent-base));
+    --accent-d40: color-mix(in srgb, black 40%, var(--accent-base));
+    --accent-d60: color-mix(in srgb, black 60%, var(--accent-base));
+
+    /* Skill badge tokens (default / light) */
+    --skill-bg: #002C66;
+    --skill-text: #FFFFFF;
+}
+
+/* Dark theme variables (L tones created by overlaying white on base) */
+.dark {
+    /* Page Background */
+    --bg: #131314;
+    /* ~#131314 */
+    /* Surface / card background */
+    --surface: #1E1F20;
+    /* ~#1E1F20 */
+    /* User card / message background */
+    --card-bg: #131314;
+    /* ~#131314 */
+    /* border / outline */
+    --outline: #444746;
+    /* ~#444746 */
+    /* input field background */
+    --input-bg: #2D2E30;
+    /* ~#2D2E30 */
+    /* primary text */
+    --text: #E3E3E3;
+    /* ~#E3E3E3 */
+    /* secondary text */
+    --muted: #C4C7C5;
+    /* ~#C4C7C5 */
+
+    /* Primary / Accent colors */
+    --primary-base: #8AB4F8;
+    /* ~#8AB4F8 */
+    /* On-primary: text color when placed on primary base */
+    --on-primary: #002C66;
+    /* ~#002C66 */
+
+    /* derived lightened swatches (white overlay) */
+    --primary-l20: color-mix(in srgb, white 20%, var(--primary-base));
+    --primary-l40: color-mix(in srgb, white 40%, var(--primary-base));
+    --primary-l60: color-mix(in srgb, white 60%, var(--primary-base));
+
+    --accent-base: #409775;
+    --accent-l20: color-mix(in srgb, white 20%, var(--accent-base));
+    --accent-l40: color-mix(in srgb, white 40%, var(--accent-base));
+    --accent-l60: color-mix(in srgb, white 60%, var(--accent-base));
+
+    /* Skill badge tokens (dark overrides) */
+    --skill-bg: #002C66;
+    /* keep same as requested */
+    --skill-text: #FFFFFF;
+}
+
+/* Apply theme vars to body when .light or .dark is set on documentElement */
+.light body,
+.light html {
+    background-color: var(--bg) !important;
+    color: var(--text-primary) !important;
+}
+
+.dark body,
+.dark html {
+    background-color: var(--bg) !important;
+    color: var(--text) !important;
+}
+
+/* Utility overrides to map current Tailwind utility classes to our vars */
+
+/* Light-mode utility mappings */
+.light .text-white {
+    color: var(--text-primary) !important;
+}
+
+.light .text-gray-300 {
+    color: var(--text-secondary) !important;
+}
+
+.light .text-gray-100 {
+    color: var(--text-primary) !important;
+}
+
+.light .bg-black {
+    background-color: var(--bg) !important;
+}
+
+.light .bg-surface {
+    background-color: var(--surface) !important;
+}
+
+.light .bg-card {
+    background-color: var(--card-bg) !important;
+}
+
+.light .input-bg {
+    background-color: var(--input-bg) !important;
+}
+
+.light .outline-color {
+    border-color: var(--outline) !important;
+}
+
+
+/* Map some Tailwind utilities to palette swatches in light mode */
+
+.light .bg-primary {
+    background-color: var(--primary-base) !important;
+}
+
+.light .bg-primary-d20 {
+    background-color: var(--primary-d20) !important;
+}
+
+.light .bg-primary-d40 {
+    background-color: var(--primary-d40) !important;
+}
+
+.light .bg-primary-d60 {
+    background-color: var(--primary-d60) !important;
+}
+
+.light .text-primary {
+    color: var(--primary-base) !important;
+}
+
+.light .text-on-primary {
+    color: var(--on-primary) !important;
+}
+
+
+.light .border-white\/10 {
+    border-color: rgba(0, 0, 0, 0.06) !important;
+}
+
+.light .bg-white\/5 {
+    background-color: rgba(0, 0, 0, 0.04) !important;
+}
+
+.dark .text-white {
+    color: var(--text) !important;
+}
+
+.dark .text-gray-300 {
+    color: var(--muted) !important;
+}
+
+/* Broad text utility overrides for Light mode */
+.light .text-gray-50,
+.light .text-white {
+    color: var(--text-primary) !important;
+}
+
+.light .text-gray-100 {
+    color: var(--text-primary) !important;
+}
+
+.light .text-gray-200 {
+    color: var(--text-secondary) !important;
+}
+
+.light .text-gray-300 {
+    color: var(--text-secondary) !important;
+}
+
+.light .text-gray-400 {
+    color: var(--text-secondary) !important;
+}
+
+.light .text-gray-500 {
+    color: var(--text-secondary) !important;
+}
+
+.light .text-gray-600 {
+    color: var(--text-secondary) !important;
+}
+
+.light .text-gray-700 {
+    color: var(--text-primary) !important;
+}
+
+.light .text-gray-800 {
+    color: var(--text-primary) !important;
+}
+
+.light .text-gray-900 {
+    color: var(--text-primary) !important;
+}
+
+/* Broad text utility overrides for Dark mode */
+.dark .text-gray-50,
+.dark .text-white {
+    color: var(--text) !important;
+}
+
+.dark .text-gray-100 {
+    color: var(--text) !important;
+}
+
+.dark .text-gray-200 {
+    color: var(--muted) !important;
+}
+
+.dark .text-gray-300 {
+    color: var(--muted) !important;
+}
+
+.dark .text-gray-400 {
+    color: var(--muted) !important;
+}
+
+.dark .text-gray-500 {
+    color: var(--muted) !important;
+}
+
+.dark .text-gray-600 {
+    color: var(--muted) !important;
+}
+
+.dark .text-gray-700 {
+    color: var(--text) !important;
+}
+
+.dark .text-gray-800 {
+    color: var(--text) !important;
+}
+
+.dark .text-gray-900 {
+    color: var(--text) !important;
+}
+
+.dark .bg-white\/5 {
+    background-color: rgba(255, 255, 255, 0.03) !important;
+}
+
+.dark .border-white\/10 {
+    border-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+/* Map some Tailwind utilities to palette swatches in dark mode */
+.dark .bg-violet-500 {
+    background-color: var(--primary-base) !important;
+}
+
+.dark .bg-violet-400 {
+    background-color: var(--primary-l20) !important;
+}
+
+.dark .bg-violet-600 {
+    background-color: var(--primary-l40) !important;
+}
+
+.dark .bg-violet-700 {
+    background-color: var(--primary-l60) !important;
+}
+
+.dark .bg-green-500 {
+    background-color: var(--accent-base) !important;
+}
+
+.dark .bg-green-400 {
+    background-color: var(--accent-l20) !important;
+}
+
+.dark .bg-green-600 {
+    background-color: var(--accent-l40) !important;
+}
+
+.dark .bg-green-700 {
+    background-color: var(--accent-l60) !important;
+}
+
+/* Ensure on-primary/text-on-primary and bg-primary/bg-surface map correctly in dark mode */
+.dark .bg-primary {
+    background-color: var(--primary-base) !important;
+}
+
+.dark .text-on-primary {
+    color: var(--on-primary) !important;
+}
+
+.dark .bg-surface {
+    background-color: var(--surface) !important;
+}
+
+/* Make outline/border tokens more muted in dark mode (soft, low-contrast) */
+.dark .outline-color {
+    border-color: rgba(255, 255, 255, 0.04) !important;
+}
+
+/* helper text token classes for primary shades */
+.light .text-primary-d20 {
+    color: var(--primary-d20) !important;
+}
+
+.light .text-primary-d40 {
+    color: var(--primary-d40) !important;
+}
+
+.light .text-primary-d60 {
+    color: var(--primary-d60) !important;
+}
+
+.dark .text-primary-d20 {
+    color: var(--primary-l20) !important;
+}
+
+.dark .text-primary-d40 {
+    color: var(--primary-l40) !important;
+}
+
+.dark .text-primary-d60 {
+    color: var(--primary-l60) !important;
+}
+@layer utilities {
+    @keyframes blink {
+        0%, 100% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0;
+        }
+    }
+
+    .animate-blink {
+        animation: blink 0.8s step-end infinite;
+    }
+
+    @keyframes loading {
+        0% {
+            transform: translate(-100%);
+        }
+
+        100% {
+            transform: translate(250%);
+        }
+    }
+
+    .animate-loading-bar {
+        animation: loading 0.8s ease infinite;
+    }
+}
